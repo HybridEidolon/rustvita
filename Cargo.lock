@@ -1,0 +1,14 @@
+[root]
+name = "rustvita"
+version = "0.1.0"
+dependencies = [
+ "compiler-builtins-snapshot 0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b (registry+https://github.com/rust-lang/crates.io-index)",
+]
+
+[[package]]
+name = "compiler-builtins-snapshot"
+version = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[metadata]
+"checksum compiler-builtins-snapshot 0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b (registry+https://github.com/rust-lang/crates.io-index)" = "ca81a7af7dcd70e798e34f9928e22c35204059493ffe3cda46a2f0c797209cf6"

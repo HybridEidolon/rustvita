@@ -1,0 +1,15 @@
+[package]
+name = "rustvita"
+version = "0.1.0"
+description = "Vita rust homebrew experiment"
+authors = ["Eidolon"]
+
+[dependencies]
+compiler-builtins-snapshot = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b"
+
+[profile.dev]
+panic = 'abort'
+debug = false
+
+[profile.release]
+panic = 'abort'

@@ -1,0 +1,6 @@
+target
+build/eboot.bin
+rustvita.unstripped.elf
+rustvita.velf
+rustvita.vpk
+param.sfo
