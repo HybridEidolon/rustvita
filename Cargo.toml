@@ -10,6 +10,7 @@ compiler-builtins-snapshot = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d2
 [profile.dev]
 panic = 'abort'
 debug = false
+lto = true
 
 [profile.release]
 panic = 'abort'
