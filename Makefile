@@ -1,9 +1,17 @@
 TITLE := RUST01337
 TARGET := RustVita
 
-.PHONY: target/vita/debug/rustvita.elf
+.PHONY: target/vita/debug/rustvita.elf clean
 
 all: rustvita.vpk
+
+clean:
+	xargo clean
+	rm -f *.elf
+	rm -f *.velf
+	rm -f *.vpk
+	rm -f build/eboot.bin
+	rm -f build/sce_sys/param.sfo
 
 rustvita.vpk: rustvita.velf
 	vita-make-fself -s $< build/eboot.bin
@@ -18,3 +26,4 @@ rustvita.velf: target/vita/debug/rustvita.elf
 
 target/vita/debug/rustvita.elf:
 	xargo build
+

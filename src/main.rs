@@ -3,27 +3,41 @@
 #![feature(lang_items)]
 #![feature(collections)]
 #![feature(alloc)]
-#![link(name = "SceKernel_stub")]
 
 extern crate collections;
 extern crate alloc;
+
+#[link(name = "SceKernel_stub")]
+extern {
+
+}
+
+#[link(name = "SceCtrl_stub")]
+extern {
+
+}
 
 #[doc(hidden)]
 pub mod psp2_sys;
 
 pub mod libc;
+
 pub mod kernel;
+pub mod ctrl;
 
 use core::fmt;
 
 use kernel::process;
-use kernel::thread;
+//use kernel::thread;
 
 #[no_mangle]
 pub extern "C" fn main(_: isize, _: *const *const u8) -> isize {
-    for _ in 0..5 {
+    loop {
         process::power_tick(process::PowerTick::Default);
-        thread::delay_thread(1_000_000);
+        let a = ctrl::peek_buffer_positive();
+        if a.triangle() {
+            break
+        }
     }
     process::exit_process(0);
 }

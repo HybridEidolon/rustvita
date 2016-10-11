@@ -15,11 +15,11 @@
   "exe-suffix": ".elf",
   "pre-link-args": [
     "-march=armv7",
-    "-mfloat-abi=hard"
+    "-mfloat-abi=hard",
+    "-lc"
   ],
   "post-link-args": [
     "-lc",
-    "-lSceKernel_stub",
     "-Wl,-q"
   ]
 }
