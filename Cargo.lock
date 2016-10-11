@@ -2,8 +2,14 @@
 name = "rustvita"
 version = "0.1.0"
 dependencies = [
+ "alloc_system3ds 0.1.0 (git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94)",
  "compiler-builtins-snapshot 0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b (registry+https://github.com/rust-lang/crates.io-index)",
 ]
+
+[[package]]
+name = "alloc_system3ds"
+version = "0.1.0"
+source = "git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94#da38c9411db2a619b705df95b27e0ff1343085a5"
 
 [[package]]
 name = "compiler-builtins-snapshot"
@@ -11,4 +17,5 @@ version = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [metadata]
+"checksum alloc_system3ds 0.1.0 (git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94)" = "<none>"
 "checksum compiler-builtins-snapshot 0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b (registry+https://github.com/rust-lang/crates.io-index)" = "ca81a7af7dcd70e798e34f9928e22c35204059493ffe3cda46a2f0c797209cf6"

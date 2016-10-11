@@ -6,7 +6,7 @@
   "target-endian": "little",
   "target-pointer-width": "32",
   "arch": "arm",
-  "os": "linux",
+  "os": "vita",
   "cpu": "cortex-a9",
   "features": "",
   "disable-redzone": true,
@@ -15,9 +15,7 @@
   "exe-suffix": ".elf",
   "pre-link-args": [
     "-march=armv7",
-    "-mtune=cortex-a9",
-    "-mfloat-abi=hard",
-    "-mtp=soft"
+    "-mfloat-abi=hard"
   ],
   "post-link-args": [
     "-lc",

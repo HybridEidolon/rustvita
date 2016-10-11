@@ -6,6 +6,7 @@ authors = ["Eidolon"]
 
 [dependencies]
 compiler-builtins-snapshot = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b"
+alloc_system3ds = { git = "https://github.com/rust3ds/alloc_system3ds", rev = "da38c94" }
 
 [profile.dev]
 panic = 'abort'
