@@ -1,9 +1,12 @@
 TITLE := RUST01337
 TARGET := RustVita
 
-.PHONY: target/vita/debug/rustvita.elf clean
+.PHONY: target/vita/debug/rustvita.elf clean doc
 
 all: rustvita.vpk
+
+doc:
+	xargo doc
 
 clean:
 	xargo clean
