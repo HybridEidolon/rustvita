@@ -7,7 +7,9 @@
 * xargo (`cargo install xargo`)
 * effort
 
-run `make rustvita.vpk`, fire away
+run `make`. produces `rustvita.vpk` and `build/eboot.bin` and other stuff.
 
 sorry i took the vitaquake livearea stuff just to see if this works, check out
 [vitaQuake](https://github.com/Rinnegatamante/vitaQuake/)
+
+shader imports derived from [`frangcarcj/vitahelloshader`](https://github.com/frangarcj/vitahelloshader)

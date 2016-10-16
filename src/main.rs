@@ -7,18 +7,19 @@
 extern crate collections;
 extern crate alloc;
 
-#[link(name = "SceKernel_stub")]
-extern {
+// Link module stubs
 
-}
+#[link(name = "SceKernel_stub")]
+extern {}
 
 #[link(name = "SceCtrl_stub")]
-extern {
+extern {}
 
-}
-
+// System imports
 #[doc(hidden)]
 pub mod psp2_sys;
+#[doc(hidden)]
+pub mod psp2_shaders;
 
 pub mod libc;
 
