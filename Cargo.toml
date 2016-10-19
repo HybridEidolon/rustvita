@@ -7,6 +7,7 @@ authors = ["Eidolon"]
 [dependencies]
 # Provides rust allocation intrinsics via C malloc.
 alloc_system3ds = { git = "https://github.com/rust3ds/alloc_system3ds", rev = "da38c94" }
+psp2shell = { path = "psp2shell-rs" }
 
 # This provides the llvm compiler intrinsics implemented in Rust.
 # Unimplemented intrinsics are instead pulled from llvm's implementation
@@ -17,9 +18,15 @@ git = "https://github.com/rust-lang-nursery/compiler-builtins"
 features = ["c"]
 
 [profile.dev]
-panic = 'abort'
 debug = false
 lto = true
 
 [profile.release]
 panic = 'abort'
+lto = true
+
+[workspace]
+members = [
+    "psp2shell-rs",
+    "psp2shell-rs/psp2shell-sys"
+]

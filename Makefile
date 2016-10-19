@@ -20,7 +20,7 @@ clean:
 	rm -f build/sce_sys/param.sfo
 
 rustvita.vpk: rustvita.velf
-	vita-make-fself -s $< build/eboot.bin
+	vita-make-fself $< build/eboot.bin
 	vita-mksfoex -s TITLE_ID=$(TITLE) "$(TARGET)" param.sfo
 	cp -f param.sfo build/sce_sys/param.sfo
 	7z a -tzip rustvita.vpk -bd -r ./build/sce_sys ./build/eboot.bin

@@ -1,0 +1,7 @@
+[package]
+name = "psp2shell"
+version = "0.1.0"
+authors = ["Eidolon"]
+
+[dependencies]
+psp2shell-sys = { path = "psp2shell-sys" }

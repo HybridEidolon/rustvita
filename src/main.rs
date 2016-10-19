@@ -3,12 +3,20 @@
 #![feature(lang_items)]
 #![feature(collections)]
 #![feature(alloc)]
-#![feature(compiler_builtins_lib)]
+//#![feature(compiler_builtins_lib)]
 
 #[macro_use] extern crate collections;
 extern crate alloc;
 
-extern crate compiler_builtins;
+//extern crate compiler_builtins;
+
+extern crate psp2shell;
+
+// Link libraries
+// Normally the sys crate would handle this but we need EXACT linkage order.
+
+//#[link(name = "psp2shell")]
+//extern {}
 
 // Link module stubs
 
@@ -19,6 +27,21 @@ extern {}
 extern {}
 
 #[link(name = "SceAudio_stub")]
+extern {}
+
+#[link(name = "SceSysmodule_stub")]
+extern {}
+
+#[link(name = "SceNet_stub")]
+extern {}
+
+#[link(name = "SceNetCtl_stub")]
+extern {}
+
+#[link(name = "SceAppMgr_stub")]
+extern {}
+
+#[link(name = "SceRtc_stub")]
 extern {}
 
 // System imports
@@ -41,23 +64,37 @@ use alloc::boxed::Box;
 use kernel::process;
 //use kernel::thread;
 
+use psp2shell::Shell;
+
 #[no_mangle]
 pub extern "C" fn main(_: isize, _: *const *const u8) -> isize {
-    let port = audioout::Port::open(audioout::PortType::Main, 512, 48000, audioout::Mode::Mono);
-    let mut buf = vec![0; port.buf_size()].into_boxed_slice();
-    let buf: Box<[u8]> = (0..port.buf_size())
-        .enumerate()
-        .map(|a| {a.1 as u8})
-        .collect::<Vec<_>>().into_boxed_slice();
+    real_main();
+    process::exit_process(0);
+}
+
+pub fn real_main() {
+    let shell: Shell = Shell::init(3333, 0).unwrap();
+
+    shell.print("hi\n\0");
+
+    let port = audioout::Port::open(audioout::PortType::Main, 4096, 48000, audioout::Mode::Mono);
+
+    let mut buf = vec![0u8; port.buf_size()];
+    for (i, x) in buf.iter_mut().enumerate() {
+        *x = i as u8;
+    }
+
+    let buf = buf.into_boxed_slice();
+
     loop {
         process::power_tick(process::PowerTick::Default);
         port.output(&buf);
+        shell.print("hello\n\0");
         let a = ctrl::peek_buffer_positive();
         if a.triangle() {
             break
         }
     }
-    process::exit_process(0);
 }
 
 #[lang = "panic_fmt"]

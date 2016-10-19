@@ -1,0 +1,8 @@
+[package]
+name = "psp2shell-sys"
+version = "0.1.0"
+authors = ["Eidolon"]
+links = "psp2shell"
+build = "build.rs"
+
+[dependencies]

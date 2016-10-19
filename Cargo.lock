@@ -4,6 +4,7 @@ version = "0.1.0"
 dependencies = [
  "alloc_system3ds 0.1.0 (git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94)",
  "compiler_builtins 0.1.0 (git+https://github.com/rust-lang-nursery/compiler-builtins)",
+ "psp2shell 0.1.0",
 ]
 
 [[package]]
@@ -24,6 +25,17 @@ dependencies = [
 name = "gcc"
 version = "0.3.37"
 source = "registry+https://github.com/rust-lang/crates.io-index"
+
+[[package]]
+name = "psp2shell"
+version = "0.1.0"
+dependencies = [
+ "psp2shell-sys 0.1.0",
+]
+
+[[package]]
+name = "psp2shell-sys"
+version = "0.1.0"
 
 [[package]]
 name = "rustc-cfg"
