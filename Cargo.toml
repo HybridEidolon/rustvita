@@ -13,9 +13,9 @@ psp2shell = { path = "psp2shell-rs" }
 # Unimplemented intrinsics are instead pulled from llvm's implementation
 # and compiled with gcc. Env vars must be set to make this work,
 # see Makefile for details.
-[dependencies.compiler_builtins]
-git = "https://github.com/rust-lang-nursery/compiler-builtins"
-features = ["c"]
+#[dependencies.compiler_builtins]
+#git = "https://github.com/rust-lang-nursery/compiler-builtins"
+#features = ["c"]
 
 [profile.dev]
 debug = false

@@ -3,7 +3,6 @@ name = "rustvita"
 version = "0.1.0"
 dependencies = [
  "alloc_system3ds 0.1.0 (git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94)",
- "compiler_builtins 0.1.0 (git+https://github.com/rust-lang-nursery/compiler-builtins)",
  "psp2shell 0.1.0",
 ]
 
@@ -11,20 +10,6 @@ dependencies = [
 name = "alloc_system3ds"
 version = "0.1.0"
 source = "git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94#da38c9411db2a619b705df95b27e0ff1343085a5"
-
-[[package]]
-name = "compiler_builtins"
-version = "0.1.0"
-source = "git+https://github.com/rust-lang-nursery/compiler-builtins#600ed3b36e3466cc179478c7c0c2b79b3548829d"
-dependencies = [
- "gcc 0.3.37 (registry+https://github.com/rust-lang/crates.io-index)",
- "rustc-cfg 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)",
-]
-
-[[package]]
-name = "gcc"
-version = "0.3.37"
-source = "registry+https://github.com/rust-lang/crates.io-index"
 
 [[package]]
 name = "psp2shell"
@@ -37,13 +22,5 @@ dependencies = [
 name = "psp2shell-sys"
 version = "0.1.0"
 
-[[package]]
-name = "rustc-cfg"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-
 [metadata]
 "checksum alloc_system3ds 0.1.0 (git+https://github.com/rust3ds/alloc_system3ds?rev=da38c94)" = "<none>"
-"checksum compiler_builtins 0.1.0 (git+https://github.com/rust-lang-nursery/compiler-builtins)" = "<none>"
-"checksum gcc 0.3.37 (registry+https://github.com/rust-lang/crates.io-index)" = "41337e9dc80ebadf36b4f252bf7440f61bcf34f99caa170e50dcd0f9a0cdb5d8"
-"checksum rustc-cfg 0.2.0 (registry+https://github.com/rust-lang/crates.io-index)" = "37937dfed502ccc4e644c3cc272222e31adc2b1f5d215f6f8f8e1a422072e516"

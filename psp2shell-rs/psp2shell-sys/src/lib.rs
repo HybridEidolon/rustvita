@@ -1,6 +1,6 @@
 #![no_std]
 
-#![allow(dead_code, non_camel_case_types, non_camel_case_globals, non_snake_case)]
+#![allow(dead_code, non_camel_case_types, non_snake_case)]
 pub type c_char = u8;
 pub type c_int = isize;
 

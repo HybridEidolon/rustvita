@@ -1,4 +1,4 @@
-use libc::*;
+//use libc::*;
 
 //pub struct SceShaccCgCompileOptions {
 //

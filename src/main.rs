@@ -57,9 +57,6 @@ pub mod ctrl;
 pub mod audioout;
 
 use core::fmt;
-use core::iter::Iterator;
-use collections::Vec;
-use alloc::boxed::Box;
 
 use kernel::process;
 //use kernel::thread;
@@ -68,15 +65,13 @@ use psp2shell::Shell;
 
 #[no_mangle]
 pub extern "C" fn main(_: isize, _: *const *const u8) -> isize {
+    let shell = Shell::init(3333, 0).unwrap();
     real_main();
+    drop(shell);
     process::exit_process(0);
 }
 
 pub fn real_main() {
-    let shell: Shell = Shell::init(3333, 0).unwrap();
-
-    shell.print("hi\n\0");
-
     let port = audioout::Port::open(audioout::PortType::Main, 4096, 48000, audioout::Mode::Mono);
 
     let mut buf = vec![0u8; port.buf_size()];
@@ -89,7 +84,6 @@ pub fn real_main() {
     loop {
         process::power_tick(process::PowerTick::Default);
         port.output(&buf);
-        shell.print("hello\n\0");
         let a = ctrl::peek_buffer_positive();
         if a.triangle() {
             break

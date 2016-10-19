@@ -1,5 +1,3 @@
-use core::mem;
-
 use psp2_sys::*;
 
 #[repr(i32)]
@@ -34,7 +32,7 @@ impl Port {
     /// 44100, or 48000.
     pub fn open(port: PortType, len: u32, freq: u32, mode: Mode) -> Port {
         let port = unsafe {
-            match sceAudioOutOpenPort(0, len as i32, freq as i32, mode as i32) {
+            match sceAudioOutOpenPort(port as i32, len as i32, freq as i32, mode as i32) {
                 i if i < 0 => panic!("failed to open audio port"),
                 i => i
             }
