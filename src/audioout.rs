@@ -23,9 +23,6 @@ impl Port {
                 i => i
             }
         };
-        unsafe {
-            sceAudioOutSetConfig(port, -1, -1, -1);
-        };
         Port {
             port: port,
             len: len,
