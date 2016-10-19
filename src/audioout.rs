@@ -1,3 +1,5 @@
+use core::mem;
+
 use psp2_sys::*;
 
 #[repr(i32)]
@@ -13,6 +15,8 @@ pub struct Port {
     _freq: u32,
     mode: Mode
 }
+
+unsafe impl Send for Port {}
 
 impl Port {
     /// Creates a new audio output port with the given properties.
@@ -44,6 +48,15 @@ impl Port {
         }
         unsafe {
             sceAudioOutOutput(self.port, buf as *const _ as *const ::libc::c_void);
+        }
+    }
+
+    /// Set the volume of each channel independently. Pass None to preserve the previous volume.
+    pub fn set_volume(&self, left: Option<u16>, right: Option<u16>) {
+        let flags = if left.is_some() { 1 } else { 0 } | if right.is_some() { 2 } else { 0 };
+        let mut arr = [left.unwrap_or(0) as i32, right.unwrap_or(0) as i32];
+        unsafe {
+            sceAudioOutSetVolume(self.port, flags, arr[..].as_mut_ptr());
         }
     }
 }
