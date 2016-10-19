@@ -3,13 +3,16 @@ TARGET := RustVita
 
 .PHONY: target/vita/debug/rustvita.elf clean doc
 
+PWD := $(shell pwd)
+XARGO_ENV := RUST_TARGET_PATH=$(PWD) CC=arm-vita-eabi-gcc AR=arm-vita-eabi-ar CFLAGS=-D_POSIX_THREADS
+
 all: rustvita.vpk
 
 doc:
-	xargo doc
+	$(XARGO_ENV) xargo doc
 
 clean:
-	xargo clean
+	$(XARGO_ENV) xargo clean
 	rm -f *.elf
 	rm -f *.velf
 	rm -f *.vpk
@@ -28,5 +31,5 @@ rustvita.velf: target/vita/debug/rustvita.elf
 	vita-elf-create $< $@ $(VITASDK)/share/db.json sceshaccgc.json
 
 target/vita/debug/rustvita.elf:
-	xargo build
+	$(XARGO_ENV) xargo build --target vita
 

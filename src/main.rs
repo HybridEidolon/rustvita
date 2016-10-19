@@ -3,9 +3,12 @@
 #![feature(lang_items)]
 #![feature(collections)]
 #![feature(alloc)]
+#![feature(compiler_builtins_lib)]
 
 #[macro_use] extern crate collections;
 extern crate alloc;
+
+extern crate compiler_builtins;
 
 // Link module stubs
 
@@ -32,17 +35,20 @@ pub mod audioout;
 
 use core::fmt;
 use core::iter::Iterator;
+use collections::Vec;
+use alloc::boxed::Box;
 
 use kernel::process;
 //use kernel::thread;
 
 #[no_mangle]
 pub extern "C" fn main(_: isize, _: *const *const u8) -> isize {
-    let port = audioout::Port::open(512, 48000, audioout::Mode::Mono);
+    let port = audioout::Port::open(audioout::PortType::Main, 512, 48000, audioout::Mode::Mono);
     let mut buf = vec![0; port.buf_size()].into_boxed_slice();
-    for (i, x) in buf.iter_mut().enumerate() {
-        *x = i as u8;
-    }
+    let buf: Box<[u8]> = (0..port.buf_size())
+        .enumerate()
+        .map(|a| {a.1 as u8})
+        .collect::<Vec<_>>().into_boxed_slice();
     loop {
         process::power_tick(process::PowerTick::Default);
         port.output(&buf);

@@ -4,6 +4,14 @@ use psp2_sys::*;
 
 #[repr(i32)]
 #[derive(Clone, Copy, PartialEq, Eq)]
+pub enum PortType {
+    Main = 0,
+    Bgm = 1,
+    Voice = 2
+}
+
+#[repr(i32)]
+#[derive(Clone, Copy, PartialEq, Eq)]
 pub enum Mode {
     Mono = 0,
     Stereo = 1
@@ -19,10 +27,14 @@ pub struct Port {
 unsafe impl Send for Port {}
 
 impl Port {
-    /// Creates a new audio output port with the given properties.
-    pub fn open(len: u32, freq: u32, mode: Mode) -> Port {
+    /// Opens a new audio output port with the given properties.
+    ///
+    /// The Main port only supports 48000 sample frequency. Bgm and Voice
+    /// can be opened with 8000, 11025, 12000, 16000, 22050, 24000, 32000,
+    /// 44100, or 48000.
+    pub fn open(port: PortType, len: u32, freq: u32, mode: Mode) -> Port {
         let port = unsafe {
-            match sceAudioOutOpenPort(SCE_AUDIO_OUT_PORT_TYPE_MAIN as i32, len as i32, freq as i32, mode as i32) {
+            match sceAudioOutOpenPort(port as i32, len as i32, freq as i32, mode as i32) {
                 i if i < 0 => panic!("failed to open audio port"),
                 i => i
             }
@@ -42,6 +54,9 @@ impl Port {
 
     /// Outputs the data in the given buffer to the port. The buffer must be the exact size
     /// specified by [buf_size]. Blocks until the buffer is finished playing.
+    ///
+    /// If the port was opened in Stereo mode, then the left and right channels are interleaved
+    /// in the buffer.
     pub fn output(&self, buf: &[u8]) {
         if buf.len() != self.buf_size() {
             panic!("invalid buffer size");

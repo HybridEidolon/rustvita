@@ -5,8 +5,16 @@ description = "Vita rust homebrew experiment"
 authors = ["Eidolon"]
 
 [dependencies]
-compiler-builtins-snapshot = "0.0.20161008+c56faf22abb39724008148d58f12bcd43b6d236b"
+# Provides rust allocation intrinsics via C malloc.
 alloc_system3ds = { git = "https://github.com/rust3ds/alloc_system3ds", rev = "da38c94" }
+
+# This provides the llvm compiler intrinsics implemented in Rust.
+# Unimplemented intrinsics are instead pulled from llvm's implementation
+# and compiled with gcc. Env vars must be set to make this work,
+# see Makefile for details.
+[dependencies.compiler_builtins]
+git = "https://github.com/rust-lang-nursery/compiler-builtins"
+features = ["c"]
 
 [profile.dev]
 panic = 'abort'
